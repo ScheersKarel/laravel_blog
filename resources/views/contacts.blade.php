@@ -1,29 +1,3 @@
-<?php
-use App\Models\Contact;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $errorcounter = 0;
-    if (isset($_POST['Add'])) {
-        if (empty($name)) {
-            echo "name is empty";
-            $errorcounter++;
-        }
-        if (empty($email)) {
-            echo "email is empty";
-            $errorcounter++;
-        }
-        if ($errorcounter == 0) {
-            $contact = new Contact;
-            $contact->name = $name;
-            $contact->email = $email;
-            $contact->save();
-        }
-    }
-    }
-?>  
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,13 +8,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 </head>
 <body>
-<h1>Contacts</h1>
+    @if(session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+    @endif
+    
+@if(count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
 
-    <table>
+@endif
+             
+Contacts - <a href="/create">create contact</a>
+
+        <table>
             <tr>
                 <td><h3>Name </h3></td>
                 <td><h3>E-mail </h3></td>
                 <td><h3>Action </h3></td>
+                <td>{{$contacts->links()}}</td>
             </tr>
 
         @foreach ($contacts as $contact)
@@ -48,14 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <tr>
                 <td><label>{{ $contact->name }}</label></td>
                 <td><label>{{ $contact->email }}</label></td>
-                <td><a href="/edit/{{ $contact->id }}">edit</a>/<a href="/delete/{{ $contact->id }}">delete</a></td>
+                <td><a href="{{route('edit', ['id' => $contact->id])}}">edit</a> / <a href="{{route('delete', ['id' => $contact->id])}}">delete</a></td>
             </tr>
             
         @endforeach
-    </table>
+        </table>
     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<h1></h1>
 
    
-    <a href="/create">create contact</a>
+    
+   
+    
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/contacts', [App\Http\Controllers\userController::class, 'index'])->name('contacts');
+Route::get('/contacts', [App\Http\Controllers\ContactController::class, 'index'])->name('contacts');
 
-Route::view('create', 'create');
+Route::get('/create', [App\Http\Controllers\ContactController::class, 'GoToAdd']);
 Route::POST('create', [App\Http\Controllers\ContactController::class, 'AddContact' ]);
+
+Route::get('edit/{id}', [App\Http\Controllers\ContactController::class, 'edit'])->name('edit');
+Route::post('edit/{id}', [App\Http\Controllers\ContactController::class, 'update'])->name('update');
+
+Route::get('delete/{id}', [App\Http\Controllers\ContactController::class, 'delete'])->name('delete');
+Route::POST('delete/{id}', [App\Http\Controllers\ContactController::class, 'DeleteContact']);
