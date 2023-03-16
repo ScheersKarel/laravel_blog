@@ -1,3 +1,4 @@
+
 <form method="post" action="{{route('update', ['id' => $contact->id])}}" >
         @csrf
         <table>
