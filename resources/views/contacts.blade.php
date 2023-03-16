@@ -34,21 +34,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 </head>
 <body>
-    <h1>Contacts</h1>
+<h1>Contacts</h1>
+
     <table>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-           
-        </tr>
+            <tr>
+                <td><h3>Name </h3></td>
+                <td><h3>E-mail </h3></td>
+                <td><h3>Action </h3></td>
+            </tr>
+
         @foreach ($contacts as $contact)
-        <tr>
-            <td>{{ $contact->name }}</td>
-            <td>{{ $contact->email }}</td>
+        
+            <tr>
+                <td><label>{{ $contact->name }}</label></td>
+                <td><label>{{ $contact->email }}</label></td>
+                <td><a href="/edit/{{ $contact->id }}">edit</a>/<a href="/delete/{{ $contact->id }}">delete</a></td>
+            </tr>
             
-        </tr>
         @endforeach
     </table>
+    
+
    
     <a href="/create">create contact</a>
 </body>

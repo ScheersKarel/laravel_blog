@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/contacts', [App\Http\Controllers\userController::class, 'index'])->name('contacts');
 
-Route::get('/create', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
+Route::view('create', 'create');
+Route::POST('create', [App\Http\Controllers\ContactController::class, 'AddContact' ]);
