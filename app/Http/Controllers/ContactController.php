@@ -9,7 +9,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::where('user_id', Auth::user()->id)->paginate(15);
+        $contacts = Contact::where('user_id', Auth::user()->id)->where('active',1)->paginate(15);
        
         return view('contacts', ['contacts' => $contacts]);
     }
@@ -62,10 +62,11 @@ class ContactController extends Controller
         return redirect('contacts')->with('error', 'Contact was updated!');     
     }
 
-    public function delete(Request $req, int $id){
+    public function delete(int $id){
         try{
             $contact = Contact::findOrFail($id);
-            $contact->delete();
+            $contact->active = 0;
+            $contact->save();
             
 
         } catch (\Throwable $th) {
