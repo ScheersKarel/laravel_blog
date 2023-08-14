@@ -18,7 +18,7 @@ class ContactController extends Controller
         return view('create');
     }
 
-    function AddContact(Request $req){
+    function save(Request $req){
        $this->validate($req, [
             'name' => 'required',
             'email' => 'required|email'

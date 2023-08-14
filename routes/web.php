@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/contacts', [App\Http\Controllers\ContactController::class, 'index'])->name('contacts');
 
     Route::get('/create', [App\Http\Controllers\ContactController::class, 'Add'])->name('create');
-    Route::POST('create', [App\Http\Controllers\ContactController::class, 'AddContact' ]);
+    Route::POST('create', [App\Http\Controllers\ContactController::class, 'save' ])->name('save');
 
     Route::get('edit/{id}', [App\Http\Controllers\ContactController::class, 'edit'])->name('edit');
     Route::post('edit/{id}', [App\Http\Controllers\ContactController::class, 'update'])->name('update');
