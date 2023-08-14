@@ -14,7 +14,7 @@ class ContactController extends Controller
         return view('contacts', ['contacts' => $contacts]);
     }
 
-    function GoToAdd(){
+    function Add(){
         return view('create');
     }
 

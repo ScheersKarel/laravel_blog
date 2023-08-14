@@ -25,7 +25,7 @@
 
 @endif
              
-Contacts - <a href="/create">create contact</a>
+Contacts - <a href="{{route('create')}}">create contact</a>
 
         <table>
             <tr>
